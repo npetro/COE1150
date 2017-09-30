@@ -38,21 +38,19 @@ int main(){
 	printf("Recieved:\n\n%s\n",server_message);
 	
 	char *str1 = "Content-Length: ";
-	char *result1 = strstr(server_message, str1);
-	int position1 = result1 - str1;
-	printf("Position 1: %d\n", position1);
-	int substringLength1 = strlen(str1) - position1;
+	char *next_number_character = strstr(server_message,str1)+((strlen(str1))*sizeof(char));
 	
 	char *str2 = "Connection:";
-	char *result2 = strstr(server_message, str2);
-	int position2 = result2 - str2;
-	printf("Position 2: %d\n", position2);
-	int substringLength2 = strlen(str2) - position2;
+	char *end_number = strstr(server_message,str2)-(2*sizeof(char)); //Remove two chars since the previous line ends in \r\n
 	
-	char hold[6];
-	strncpy(hold, result1+((16*sizeof(char))), 5);
-	hold[5]='\0';
-	printf("%c%c%c%c",hold[0],hold[1],hold[2],hold[3]);
+	//Create the number by adding each digit, one at a time
+	int number=0;
+	while(next_number_character<end_number){
+		number = (number*10)+(next_number_character[0]-'0');
+		next_number_character+=sizeof(char);
+	}
+	printf("%d\n",number);
+	
 	
 	close(client_socket);
 	return 0;
