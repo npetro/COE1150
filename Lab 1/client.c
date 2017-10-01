@@ -132,7 +132,7 @@ int main(){
 	printf("-----------------------------------------------\n");
 
 	printf("\n");
-	free(header);
+	free(content);
 
 	close(client_socket);
 	return 0;
