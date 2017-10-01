@@ -13,7 +13,7 @@
 #define URL "api.wunderground.com"
 
 int main(){
-	char server_message[450];
+	char server_message[800];
     struct addrinfo hints;
 	struct addrinfo *result;
 	
@@ -44,13 +44,15 @@ int main(){
 	char *end_number = strstr(server_message,str2)-(2*sizeof(char)); //Remove two chars since the previous line ends in \r\n
 	
 	//Create the number by adding each digit, one at a time
-	int number=0;
+	int response_length=0;
 	while(next_number_character<end_number){
-		number = (number*10)+(next_number_character[0]-'0');
+		response_length = (response_length*10)+(next_number_character[0]-'0');
 		next_number_character+=sizeof(char);
 	}
-	printf("%d\n",number);
+	printf("%d\n",response_length);
 	
+	char *str3 = "<response>";
+	char *response_start = strstr(server_message,str3);
 	
 	close(client_socket);
 	return 0;
