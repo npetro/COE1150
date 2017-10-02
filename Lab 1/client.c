@@ -24,7 +24,17 @@
 	[ ] Can we recover? lols
 */
 
-int main(){
+int main(int argc, char *argv[]){
+	if(argc!=2){
+		printf("Invalid. Usage: ./%s <us_zipcode>",argv[0]);
+		exit(-1);
+	}
+	int zipcode = atoi(argv[1]);
+	if(zipcode<=0 || zipcode>99999){
+		printf("The entered zipcode (%s) is invalid.",argv[1]);
+		exit(-1);
+	}
+
 	char peek_message[800];
     struct addrinfo hints;
 	struct addrinfo *result;
