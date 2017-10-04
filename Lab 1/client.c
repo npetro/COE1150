@@ -24,17 +24,6 @@
 #define API_KEY "cf497a3ca5237e42"
 #define URL "api.wunderground.com"
 
-/* DELETE MEH
-	[x] User input - input zip code
-	[x] User input - check number args == 2 && 5 digits, else display help man
-	[ ] Group into two functions that main calls - parse and display
-	[x] Rename byte_count
-	[ ] Rename str1 and str2
-	[ ] Use while loops for every recv
-	[x] Comments
-	[x] Any addition error handling?
-*/
-
 int main(int argc, char *argv[]){
 	int success;
 	/*
@@ -62,10 +51,12 @@ int getWeather(char *zipcode){
 	int recv_bytes = 0;
 	int content_length = 0;
 	int header_length = 0;
+	int peek_size = 800;
 	char peek_message[800];
     struct addrinfo hints;
 	struct addrinfo *result;
 	char get_command[100];
+	char *curr_ptr;
 	
 	hints.ai_family=AF_UNSPEC;
 	hints.ai_socktype=SOCK_STREAM;
@@ -93,19 +84,23 @@ int getWeather(char *zipcode){
 	/*
 	 * Peek at response to get content length and size of header
 	 */
-	recv_bytes = recv(client_socket, peek_message, sizeof(peek_message)-1,MSG_PEEK);
-	if(recv_bytes<=0){
-		printf("No message received from host\n");
-		return -1;
-	}
+	curr_ptr = peek_message;
+	do{
+		recv_bytes = recv(client_socket, curr_ptr, sizeof(peek_message)-1,MSG_PEEK);
+		if(recv_bytes<=0){
+			printf("No message received from host\n");
+			return -1;
+		}
+		curr_ptr+=recv_bytes*sizeof(char);
+	}while((curr_ptr-peek_message)/sizeof(char)<peek_size-1);
 	peek_message[recv_bytes] = 0;
 
 	// Get content length
-	char *str1 = "Content-Length: ";
-	char *next_number_character = strstr(peek_message,str1)+((strlen(str1))*sizeof(char));
+	char *content_id = "Content-Length: ";
+	char *next_number_character = strstr(peek_message,content_id)+((strlen(content_id))*sizeof(char));
 	
-	char *str2 = "Connection:";
-	char *end_number = strstr(peek_message,str2)-(2*sizeof(char)); //Remove two chars since the previous line ends in \r\n
+	char *connection_id = "Connection:";
+	char *end_number = strstr(peek_message,connection_id)-(2*sizeof(char)); //Remove two chars since the previous line ends in \r\n
 	
 	while(next_number_character<end_number){
 		content_length = (content_length*10)+(next_number_character[0]-'0');
@@ -121,11 +116,15 @@ int getWeather(char *zipcode){
 	 * Recv header and discard it
 	 */
 	char *header = malloc(sizeof(char) * (header_length+1));
-	recv_bytes = recv(client_socket, header, header_length,0);
-	if(recv_bytes<=0){
-		printf("No message received from host\n");
-		return -1;
-	}
+	curr_ptr = header;
+	do{
+		recv_bytes = recv(client_socket, curr_ptr, header_length,0);
+		if(recv_bytes<=0){
+			printf("No message received from host\n");
+			return -1;
+		}
+		curr_ptr+=recv_bytes*sizeof(char);
+	}while((curr_ptr-header)/sizeof(char)<header_length-1);
 	header[recv_bytes] = 0;
 	free(header);
 	
@@ -133,16 +132,16 @@ int getWeather(char *zipcode){
 	 * Recv content
 	 */
 	char *content = malloc(sizeof(char) * (content_length+1));
-	char *curr_content_ptr = content;
+	curr_ptr = content;
 	// We must keep recv'ing if the recv gives less bytes than we ask for
 	do{
-		recv_bytes = recv(client_socket, curr_content_ptr, content_length,0);
+		recv_bytes = recv(client_socket, curr_ptr, content_length,0);
 		if(recv_bytes<=0){
 			printf("No message received from host\n");
 			return -1;
 		}
-		curr_content_ptr+=recv_bytes*sizeof(char);
-	}while((curr_content_ptr-content)/sizeof(char)<content_length-1);
+		curr_ptr+=recv_bytes*sizeof(char);
+	}while((curr_ptr-content)/sizeof(char)<content_length-1);
 	content[content_length] = 0;
 	close(client_socket);
 	
