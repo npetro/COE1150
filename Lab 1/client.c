@@ -51,13 +51,13 @@ int main(int argc, char *argv[]){
 	}
 
 	/*
-	 * Display the weather
+	 * Get and Display the weather
 	 */
-	success = displayWeather(argv[1]);
+	success = getWeather(argv[1]);
 	return success;
 }
 
-int displayWeather(char *zipcode){
+int getWeather(char *zipcode){
 	int success = 0;
 	int recv_bytes = 0;
 	int content_length = 0;
@@ -144,7 +144,19 @@ int displayWeather(char *zipcode){
 		curr_content_ptr+=recv_bytes*sizeof(char);
 	}while((curr_content_ptr-content)/sizeof(char)<content_length-1);
 	content[content_length] = 0;
+	close(client_socket);
 	
+	/*
+	 * Display Weather Nicely
+	 */
+	success = displayWeather(content);
+	
+	free(content);
+	return success;
+}
+
+int displayWeather(char *content){
+	int success = 0;
 	/*
 	 * Parse, prettify, and print the content
 	 */
@@ -204,11 +216,7 @@ int displayWeather(char *zipcode){
 
 	printLine();
 	printf("\n");
-
-	free(content);
-
-	close(client_socket);
-	return success;
+	
 }
 
 int printLine(){
