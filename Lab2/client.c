@@ -20,7 +20,7 @@
 #include <arpa/inet.h>
 #include <string.h>
 
-#define PORT 80
+#define PORT 8080
 #define URL "127.0.0.1"
 
 #define TAG_CONTENT_LENGTH "Content-Length: "
@@ -102,7 +102,7 @@ int sendToServer(char *msg){
 		curr_ptr+=recv_bytes*sizeof(char);
 	}while((curr_ptr-peek_message)/sizeof(char)<peek_size-1);
 	peek_message[recv_bytes] = 0;
-
+	fprintf(stderr,"%s",peek_message);
 	/*
 	 * Get content length
 	 */
