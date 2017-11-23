@@ -23,26 +23,40 @@
 #define PORT 8080
 #define URL "127.0.0.1"
 
-#define TAG_CONTENT_LENGTH "Content-Length: "
-#define TAG_LINE_AFTER_CONTENT_LENGTH "ETag: "
+#define TAG_CONTENT_LENGTH_START "Content-Length: "
+#define TAG_CONTENT_LENGTH_END "Connection: "
 #define TAG_LAST_HEADER_LINE "Connection: keep-alive\r\n\r\n"
 
 int main(int argc, char *argv[]){
 	int success;
 	/*
-	 * Check input args for proper zipcode
+	 * Check input args for tag and msg
 	 */
-	if(argc!=1){
-		printf("Invalid. Usage: %s <text>\n",argv[0]);
+	if(argc!=3){
+		printf("Invalid. Usage examples: \n",argv[0]);
+		printf("\tEncode: %s -d \"hello world\"\n",argv[0]);
+		printf("\tDecode: %s -e \"ifmmp xpsme\"\n",argv[0]);
+		exit(-1);
+	} 
+	
+	char msg[strlen(argv[2])+3];
+	if(strcmp(argv[1],"-d")==0){
+		//Decode
+		strcpy(msg,"d:");
+	}
+	else if(strcmp(argv[1],"-e")==0){
+		//Encode
+		strcpy(msg,"e:");
+	}
+	else{
+		printf("Sorry, \"%s\" is not a supported tag",argv[1]);
 		exit(-1);
 	}
+	strcat(msg,argv[2]);
 
-	sendToServer(argv[1]);
+	sendToServer(msg);
 
-	/*
-	 * Get and Display the weather
-	 */
-	return 1;
+	return 0;
 }
 
 int sendToServer(char *msg){
@@ -52,7 +66,7 @@ int sendToServer(char *msg){
 	int header_length = 0;
 	int peek_size = 800;
 	char peek_message[peek_size];
-	char get_command[100];
+	char get_command[strlen(msg)+128];
 	struct sockaddr_in server_addr;
 	char *curr_ptr;
 	
@@ -86,7 +100,7 @@ int sendToServer(char *msg){
 	/*
 	 * Build a GET request and send it
 	 */
-	strcpy(get_command,"GET /demo/fullnight/on HTTP/1.1\r\nHost: "URL"\r\n\r\n");
+	sprintf(get_command,"POST / HTTP/1.1\r\nHost: "URL"\r\nContent-Length:%d\r\n%s\r\n\r\n",strlen(msg),msg);
 	send(client_socket,get_command,strlen(get_command),0);
 	
 	/*
@@ -102,13 +116,13 @@ int sendToServer(char *msg){
 		curr_ptr+=recv_bytes*sizeof(char);
 	}while((curr_ptr-peek_message)/sizeof(char)<peek_size-1);
 	peek_message[recv_bytes] = 0;
-	fprintf(stderr,"%s",peek_message);
+
 	/*
 	 * Get content length
 	 */
-	char *content_length_ptr = strstr(peek_message,TAG_CONTENT_LENGTH)+strlen(TAG_CONTENT_LENGTH);
+	char *content_length_ptr = strstr(peek_message,TAG_CONTENT_LENGTH_START)+strlen(TAG_CONTENT_LENGTH_START);
 	
-	char *content_length_end = strstr(peek_message,TAG_LINE_AFTER_CONTENT_LENGTH) -
+	char *content_length_end = strstr(peek_message,TAG_CONTENT_LENGTH_END) -
 		(2*sizeof(char)); //Rm 2 chars since the previous line ends in \r\n
 	
 	while(content_length_ptr<content_length_end){
