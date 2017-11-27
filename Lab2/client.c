@@ -20,7 +20,7 @@
 #include <arpa/inet.h>
 #include <string.h>
 
-#define PORT 8080
+#define PORT 8085
 #define URL "127.0.0.1"
 
 #define TAG_CONTENT_LENGTH_START "Content-Length: "
@@ -100,7 +100,7 @@ int sendToServer(char *msg){
 	/*
 	 * Build a GET request and send it
 	 */
-	sprintf(get_command,"POST / HTTP/1.1\r\nHost: "URL"\r\nContent-Length:%d\r\n%s\r\n\r\n",strlen(msg),msg);
+	sprintf(get_command,"POST / HTTP/1.1\r\nHost: "URL"\r\nContent-Length: %d\r\nConnection: keep-alive\r\n\r\n%s\r\n",strlen(msg),msg);
 	send(client_socket,get_command,strlen(get_command),0);
 	
 	/*
@@ -114,7 +114,7 @@ int sendToServer(char *msg){
 			return -1;
 		}
 		curr_ptr+=recv_bytes*sizeof(char);
-	}while((curr_ptr-peek_message)/sizeof(char)<peek_size-1);
+	} while((curr_ptr-peek_message)/sizeof(char)<peek_size-1);
 	peek_message[recv_bytes] = 0;
 
 	/*
@@ -148,7 +148,7 @@ int sendToServer(char *msg){
 			return -1;
 		}
 		curr_ptr+=recv_bytes*sizeof(char);
-	}while((curr_ptr-header)/sizeof(char)<header_length-1);
+	} while((curr_ptr-header)/sizeof(char)<header_length-1);
 	header[recv_bytes] = 0;
 	free(header);
 	
@@ -165,10 +165,10 @@ int sendToServer(char *msg){
 			return -1;
 		}
 		curr_ptr+=recv_bytes*sizeof(char);
-	}while((curr_ptr-content)/sizeof(char)<content_length-1);
+	} while((curr_ptr-content)/sizeof(char)<content_length-1);
 	content[content_length] = 0;
 
-	fprintf(stderr,"%s",content);
+	fprintf(stderr,"%s\n",content);
 
 	close(client_socket);
 
