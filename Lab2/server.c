@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <netinet/in.h>
 #include <string.h>
+#include <ctype.h>
 #define PORT 8080
 int main(int argc, char const *argv[])
 {
@@ -12,7 +13,7 @@ int main(int argc, char const *argv[])
     int opt = 1;
     int addrlen = sizeof(address);
     char buffer[1024] = {0};
-    char *hello = "Hello from server";
+    char *holdBuffer;
       
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
@@ -33,13 +34,47 @@ int main(int argc, char const *argv[])
         perror("listen");
         exit(EXIT_FAILURE);
     }
-    if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen))<0) {
-        perror("accept");
-        exit(EXIT_FAILURE);
-    }
-    valread = read( new_socket , buffer, 1024);
-    printf("%s\n",buffer );
-    send(new_socket , hello , strlen(hello) , 0 );
-    printf("Hello message sent\n");
-    //return 0;
+	while(1) {
+	    if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen))<0) {
+	        perror("accept");
+	        exit(EXIT_FAILURE);
+	    }
+	    valread = read(new_socket , buffer, 1024);
+	    printf("%s\n",buffer);
+		//call functions here
+		strcat(holdBuffer,"Content-Length:13\r\nConnection: keep-alive\r\n");
+		strcat(holdBuffer,buffer);
+		strcat(holdBuffer, "\r\n\r\n");
+	    send(new_socket , holdBuffer , strlen(holdBuffer) , 0 );
+	    printf("Message sent\n");
+	    //return 0;
+		close(new_socket);
+		sleep(1);
+	}
+}
+
+char* encode(char *modBuffer) {
+	for (int i = 0; i < strlen(modBuffer); i = i + 1 ) {
+		if (tolower(modBuffer[i]) != 'z'){
+			modBuffer[i] = tolower(modBuffer[i]) + 1;
+		} else if (tolower(modBuffer[i]) == 'z') {
+			modBuffer[i] = 'A';
+		} else {
+			modBuffer[i] = '?';
+		}	
+ 	}
+	return modBuffer;
+}
+
+char* decode(char *modBuffer) {
+	for (int i = 0; i < strlen(modBuffer); i = i + 1 ) {
+		if (modBuffer[i] == 'A'){
+			modBuffer[i] = 'z';
+		} else if (tolower(modBuffer[i]) != 'a') {
+			modBuffer[i] = tolower(modBuffer[i]) - 1;
+		} else {
+			modBuffer[i] = '?';
+		}	
+ 	}
+	return modBuffer;
 }
