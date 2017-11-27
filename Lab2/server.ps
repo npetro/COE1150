@@ -1,0 +1,2510 @@
+%!PS-Adobe-3.0
+%%Title: server.c
+%%For: pi
+%%Creator: VIM - Vi IMproved 7.4 (2013 Aug 10)
+%%CreationDate: Mon Nov 27 14:10:38 2017
+%%DocumentData: Clean8Bit
+%%Orientation: Portrait
+%%Pages: (atend)
+%%PageOrder: Ascend
+%%BoundingBox: 59 49 516 800
+%%DocumentMedia: A4 595 842 0 () ()
+%%DocumentNeededResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-Oblique
+%%+ font Courier-BoldOblique
+%%DocumentSuppliedResources: procset VIM-Prolog 1.4 1
+%%+ encoding VIM-latin1 1.0 0
+%%Requirements: duplex collate color
+%%EndComments
+%%BeginDefaults
+%%PageResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-Oblique
+%%+ font Courier-BoldOblique
+%%PageMedia: A4
+%%EndDefaults
+%%BeginProlog
+%%BeginResource: procset VIM-Prolog
+%%BeginDocument: /usr/share/vim/vim74/print/prolog.ps
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: VIM-Prolog
+%%Version: 1.4 1
+%%EndComments
+% Editing of this file is NOT RECOMMENDED.  You run a very good risk of causing
+% all PostScript printing from VIM failing if you do.  PostScript is not called
+% a write-only language for nothing!
+/packedarray where not{userdict begin/setpacking/pop load def/currentpacking
+false def end}{pop}ifelse/CP currentpacking def true setpacking
+/bd{bind def}bind def/ld{load def}bd/ed{exch def}bd/d/def ld
+/db{dict begin}bd/cde{currentdict end}bd
+/T true d/F false d
+/SO null d/sv{/SO save d}bd/re{SO restore}bd
+/L2 systemdict/languagelevel 2 copy known{get exec}{pop pop 1}ifelse 2 ge d
+/m/moveto ld/s/show ld /ms{m s}bd /g/setgray ld/r/setrgbcolor ld/sp{showpage}bd
+/gs/gsave ld/gr/grestore ld/cp/currentpoint ld
+/ul{gs UW setlinewidth cp UO add 2 copy newpath m 3 1 roll add exch lineto
+stroke gr}bd
+/bg{gs r cp BO add 4 -2 roll rectfill gr}bd
+/sl{90 rotate 0 exch translate}bd
+L2{
+/sspd{mark exch{setpagedevice}stopped cleartomark}bd
+/nc{1 db/NumCopies ed cde sspd}bd
+/sps{3 db/Orientation ed[3 1 roll]/PageSize ed/ImagingBBox null d cde sspd}bd
+/dt{2 db/Tumble ed/Duplex ed cde sspd}bd
+/c{1 db/Collate ed cde sspd}bd
+}{
+/nc{/#copies ed}bd
+/sps{statusdict/setpage get exec}bd
+/dt{statusdict/settumble 2 copy known{get exec}{pop pop pop}ifelse
+statusdict/setduplexmode 2 copy known{get exec}{pop pop pop}ifelse}bd
+/c{pop}bd
+}ifelse
+/ffs{findfont exch scalefont d}bd/sf{setfont}bd
+/ref{1 db findfont dup maxlength dict/NFD ed{exch dup/FID ne{exch NFD 3 1 roll
+put}{pop pop}ifelse}forall/Encoding findresource dup length 256 eq{NFD/Encoding
+3 -1 roll put}{pop}ifelse NFD dup/FontType get 3 ne{/CharStrings}{/CharProcs}
+ifelse 2 copy known{2 copy get dup maxlength dict copy[/questiondown/space]{2
+copy known{2 copy get 2 index/.notdef 3 -1 roll put pop exit}if pop}forall put
+}{pop pop}ifelse dup NFD/FontName 3 -1 roll put NFD definefont pop end}bd
+CP setpacking
+(\004)cvn{}bd
+% vim:ff=unix:
+%%EOF
+%%EndDocument
+%%EndResource
+%%BeginResource: encoding VIM-latin1
+%%BeginDocument: /usr/share/vim/vim74/print/latin1.ps
+%!PS-Adobe-3.0 Resource-Encoding
+%%Title: VIM-latin1
+%%Version: 1.0 0
+%%EndComments
+/VIM-latin1[
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quotesingle
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash
+/zero /one /two /three /four /five /six /seven
+/eight /nine /colon /semicolon /less /equal /greater /question
+/at /A /B /C /D /E /F /G
+/H /I /J /K /L /M /N /O
+/P /Q /R /S /T /U /V /W
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore
+/grave /a /b /c /d /e /f /g
+/h /i /j /k /l /m /n /o
+/p /q /r /s /t /u /v /w
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis]
+/Encoding defineresource pop
+% vim:ff=unix:
+%%EOF
+%%EndDocument
+%%EndResource
+%%EndProlog
+%%BeginSetup
+595 842 0 sps
+1 nc
+T F dt
+T c
+%%IncludeResource: font Courier
+/_F0 /VIM-latin1 /Courier ref
+/F0 10 /_F0 ffs
+%%IncludeResource: font Courier-Bold
+/_F1 /VIM-latin1 /Courier-Bold ref
+/F1 10 /_F1 ffs
+%%IncludeResource: font Courier-Oblique
+/_F2 /VIM-latin1 /Courier-Oblique ref
+/F2 10 /_F2 ffs
+%%IncludeResource: font Courier-BoldOblique
+/_F3 /VIM-latin1 /Courier-BoldOblique ref
+/F3 10 /_F3 ffs
+/UO -1 d
+/UW 0.5 d
+/BO -2.5 d
+%%EndSetup
+%%Page: 1 1
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(server.c                                                                      Page 1)59.5 792.4 ms
+0.498 0.498 0 r
+(     1)59.5 772.4 ms
+0 0.498 0.498 r
+(/*)107.5 772.4 ms
+0.498 0.498 0 r
+(     2)59.5 762.4 ms
+0 0.498 0.498 r
+( * Server.c)107.5 762.4 ms
+0.498 0.498 0 r
+(     3)59.5 752.4 ms
+0 0.498 0.498 r
+( * Kevin Gilboy and Nick Petro)107.5 752.4 ms
+0.498 0.498 0 r
+(     4)59.5 742.4 ms
+0 0.498 0.498 r
+( *)107.5 742.4 ms
+0.498 0.498 0 r
+(     5)59.5 732.4 ms
+0 0.498 0.498 r
+( * This program is a server that decodes or encodes strings sent by a client)107.5 732.4 ms
+0.498 0.498 0 r
+(     6)59.5 722.4 ms
+0 0.498 0.498 r
+( * using a basic substitution cypher. The server takes messages in the form)107.5 722.4 ms
+0.498 0.498 0 r
+(     7)59.5 712.4 ms
+0 0.498 0.498 r
+( * of "d:Hello World" for decoding or "e:ifmmp xpsme" for encoding and can )107.5 712.4 ms
+0.498 0.498 0 r
+(     8)59.5 702.4 ms
+0 0.498 0.498 r
+( * handle consecutive client requests.)107.5 702.4 ms
+0.498 0.498 0 r
+(     9)59.5 692.4 ms
+0 0.498 0.498 r
+( *)107.5 692.4 ms
+0.498 0.498 0 r
+(    10)59.5 682.4 ms
+0 0.498 0.498 r
+(*/)107.5 682.4 ms
+0.498 0.498 0 r
+(    11)59.5 672.4 ms
+(    12)59.5 662.4 ms
+0 0 0.498 r
+(#include )107.5 662.4 ms
+0.498 0 0.498 r
+(<stdio.h>)s
+0.498 0.498 0 r
+(    13)59.5 652.4 ms
+0 0 0.498 r
+(#include )107.5 652.4 ms
+0.498 0 0.498 r
+(<sys/socket.h>)s
+0.498 0.498 0 r
+(    14)59.5 642.4 ms
+0 0 0.498 r
+(#include )107.5 642.4 ms
+0.498 0 0.498 r
+(<stdlib.h>)s
+0.498 0.498 0 r
+(    15)59.5 632.4 ms
+0 0 0.498 r
+(#include )107.5 632.4 ms
+0.498 0 0.498 r
+(<netinet/in.h>)s
+0.498 0.498 0 r
+(    16)59.5 622.4 ms
+0 0 0.498 r
+(#include )107.5 622.4 ms
+0.498 0 0.498 r
+(<string.h>)s
+0.498 0.498 0 r
+(    17)59.5 612.4 ms
+0 0 0.498 r
+(#include )107.5 612.4 ms
+0.498 0 0.498 r
+(<ctype.h>)s
+0.498 0.498 0 r
+(    18)59.5 602.4 ms
+(    19)59.5 592.4 ms
+0 0 0.498 r
+(#define PORT )107.5 592.4 ms
+0.498 0 0.498 r
+(1150)s
+0.498 0.498 0 r
+(    20)59.5 582.4 ms
+0 0 0.498 r
+(#define REQUEST_PEEK_SIZE )107.5 582.4 ms
+0.498 0 0.498 r
+(82)s
+0.498 0.498 0 r
+(    21)59.5 572.4 ms
+0 0 0.498 r
+(#define RESPONSE_HEADER_SIZE )107.5 572.4 ms
+0.498 0 0.498 r
+(85)s
+0.498 0.498 0 r
+(    22)59.5 562.4 ms
+0 0 0.498 r
+(#define NUM_CONNECTIONS_BUFFER )107.5 562.4 ms
+0.498 0 0.498 r
+(3)s
+0.498 0.498 0 r
+(    23)59.5 552.4 ms
+(    24)59.5 542.4 ms
+0 0.498 0.498 r
+(/*)107.5 542.4 ms
+0.498 0.498 0 r
+(    25)59.5 532.4 ms
+0 0.498 0.498 r
+( * Constants needed for content and content length extraction)107.5 532.4 ms
+0.498 0.498 0 r
+(    26)59.5 522.4 ms
+0 0.498 0.498 r
+( */)107.5 522.4 ms
+0.498 0.498 0 r
+(    27)59.5 512.4 ms
+0 0 0.498 r
+(#define TAG_CONTENT_LENGTH_START )107.5 512.4 ms
+0.498 0 0.498 r
+("Content-Length: ")s
+0.498 0.498 0 r
+(    28)59.5 502.4 ms
+0 0 0.498 r
+(#define TAG_CONTENT_LENGTH_END )107.5 502.4 ms
+0.498 0 0.498 r
+("Connection: ")s
+0.498 0.498 0 r
+(    29)59.5 492.4 ms
+0 0 0.498 r
+(#define TAG_LAST_HEADER_LINE )107.5 492.4 ms
+0.498 0 0.498 r
+("Connection: keep-alive)s
+0.498 0 0 r
+(\\r\\n\\r\\n)s
+0.498 0 0.498 r
+(")s
+0.498 0.498 0 r
+(    30)59.5 482.4 ms
+(    31)59.5 472.4 ms
+0 0.498 0 r
+(void)107.5 472.4 ms
+F0 sf
+0 g
+( encode\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(*, )s
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(    32)59.5 462.4 ms
+0 0.498 0 r
+(void)107.5 462.4 ms
+F0 sf
+0 g
+( decode\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(*, )s
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(    33)59.5 452.4 ms
+0 0.498 0 r
+(int)107.5 452.4 ms
+F0 sf
+0 g
+( handler\()s
+F1 sf
+0 0.498 0 r
+(void)s
+F0 sf
+0 g
+(*\);)s
+F1 sf
+0.498 0.498 0 r
+(    34)59.5 442.4 ms
+(    35)59.5 432.4 ms
+0 0.498 0 r
+(int)107.5 432.4 ms
+F0 sf
+0 g
+( main\()s
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+( argc, )s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+( )s
+F1 sf
+0 0.498 0 r
+(const)s
+F0 sf
+0 g
+( *argv[]\))s
+F1 sf
+0.498 0.498 0 r
+(    36)59.5 422.4 ms
+F0 sf
+0 g
+({)107.5 422.4 ms
+F1 sf
+0.498 0.498 0 r
+(    37)59.5 412.4 ms
+F0 sf
+0 g
+(    )107.5 412.4 ms
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+( server_fd, server_socket;)s
+F1 sf
+0.498 0.498 0 r
+(    38)59.5 402.4 ms
+F0 sf
+0 g
+(    )107.5 402.4 ms
+F1 sf
+0 0.498 0 r
+(struct)s
+F0 sf
+0 g
+( sockaddr_in address;)s
+F1 sf
+0.498 0.498 0 r
+(    39)59.5 392.4 ms
+F0 sf
+0 g
+(    )107.5 392.4 ms
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+( addrlen = )s
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\(address\);)s
+F1 sf
+0.498 0.498 0 r
+(    40)59.5 382.4 ms
+F0 sf
+0 g
+(      )107.5 382.4 ms
+F1 sf
+0.498 0.498 0 r
+(    41)59.5 372.4 ms
+F0 sf
+0 g
+(    )107.5 372.4 ms
+F1 sf
+0 0.498 0.498 r
+(// Creating socket file descriptor)s
+0.498 0.498 0 r
+(    42)59.5 362.4 ms
+F0 sf
+0 g
+(    )107.5 362.4 ms
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+( \(\(server_fd = socket\(AF_INET, SOCK_STREAM, )s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(\)\) == )s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(\) {)s
+F1 sf
+0.498 0.498 0 r
+(    43)59.5 352.4 ms
+F0 sf
+0 g
+(        perror\()107.5 352.4 ms
+F1 sf
+0.498 0 0.498 r
+("socket failed")s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(    44)59.5 342.4 ms
+F0 sf
+0 g
+(        exit\()107.5 342.4 ms
+F1 sf
+0.498 0 0.498 r
+(EXIT_FAILURE)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(    45)59.5 332.4 ms
+F0 sf
+0 g
+(    })107.5 332.4 ms
+F1 sf
+0.498 0.498 0 r
+(    46)59.5 322.4 ms
+F0 sf
+0 g
+(     )107.5 322.4 ms
+F1 sf
+0.498 0.498 0 r
+(    47)59.5 312.4 ms
+F0 sf
+0 g
+(    address.sin_family = AF_INET;)107.5 312.4 ms
+F1 sf
+0.498 0.498 0 r
+(    48)59.5 302.4 ms
+F0 sf
+0 g
+(    address.sin_addr.s_addr = INADDR_ANY;)107.5 302.4 ms
+F1 sf
+0.498 0.498 0 r
+(    49)59.5 292.4 ms
+F0 sf
+0 g
+(    address.sin_port = htons\( PORT \);)107.5 292.4 ms
+F1 sf
+0.498 0.498 0 r
+(    50)59.5 282.4 ms
+(    51)59.5 272.4 ms
+F0 sf
+0 g
+(    )107.5 272.4 ms
+F1 sf
+0 0.498 0.498 r
+(// Attach socket to port)s
+0.498 0.498 0 r
+(    52)59.5 262.4 ms
+F0 sf
+0 g
+(    )107.5 262.4 ms
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+( \(bind\(server_fd, \()s
+F1 sf
+0 0.498 0 r
+(struct)s
+F0 sf
+0 g
+( sockaddr *\)&address, )s
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\(address\)\)<)s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(\) {)s
+F1 sf
+0.498 0.498 0 r
+(    53)59.5 252.4 ms
+F0 sf
+0 g
+(        perror\()107.5 252.4 ms
+F1 sf
+0.498 0 0.498 r
+("bind failed")s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(    54)59.5 242.4 ms
+F0 sf
+0 g
+(        exit\()107.5 242.4 ms
+F1 sf
+0.498 0 0.498 r
+(EXIT_FAILURE)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(    55)59.5 232.4 ms
+F0 sf
+0 g
+(    })107.5 232.4 ms
+F1 sf
+0.498 0.498 0 r
+(    56)59.5 222.4 ms
+F0 sf
+0 g
+(    )107.5 222.4 ms
+F1 sf
+0.498 0.498 0 r
+(    57)59.5 212.4 ms
+F0 sf
+0 g
+(    )107.5 212.4 ms
+F1 sf
+0 0.498 0.498 r
+(//Listen to port)s
+0.498 0.498 0 r
+(    58)59.5 202.4 ms
+F0 sf
+0 g
+(    )107.5 202.4 ms
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+( \(listen\(server_fd, NUM_CONNECTIONS_BUFFER\) < )s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(\) {)s
+F1 sf
+0.498 0.498 0 r
+(    59)59.5 192.4 ms
+F0 sf
+0 g
+(        perror\()107.5 192.4 ms
+F1 sf
+0.498 0 0.498 r
+("listen")s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(    60)59.5 182.4 ms
+F0 sf
+0 g
+(        exit\()107.5 182.4 ms
+F1 sf
+0.498 0 0.498 r
+(EXIT_FAILURE)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(    61)59.5 172.4 ms
+F0 sf
+0 g
+(    })107.5 172.4 ms
+F1 sf
+0.498 0.498 0 r
+(    62)59.5 162.4 ms
+(    63)59.5 152.4 ms
+F0 sf
+0 g
+(    )107.5 152.4 ms
+F1 sf
+0 0.498 0.498 r
+(//Use threads to handle multiple client requests)s
+0.498 0.498 0 r
+(    64)59.5 142.4 ms
+F0 sf
+0 g
+(    pthread_t client_thread;)107.5 142.4 ms
+F1 sf
+0.498 0.498 0 r
+(    65)59.5 132.4 ms
+(    66)59.5 122.4 ms
+F0 sf
+0 g
+(    )107.5 122.4 ms
+F1 sf
+0.498 0.498 0 r
+(while)s
+F0 sf
+0 g
+(\(server_socket = accept\(server_fd, )s
+F1 sf
+0.498 0.498 0 r
+(    67)59.5 112.4 ms
+F0 sf
+0 g
+(        \()107.5 112.4 ms
+F1 sf
+0 0.498 0 r
+(struct)s
+F0 sf
+0 g
+( sockaddr *\)&address, \(socklen_t*\)&addrlen\)\){)s
+F1 sf
+0.498 0.498 0 r
+(    68)59.5 102.4 ms
+F0 sf
+0 g
+(        )107.5 102.4 ms
+F1 sf
+0 0.498 0.498 r
+(//Create thread to handle client request)s
+0.498 0.498 0 r
+(    69)59.5 92.4 ms
+F0 sf
+0 g
+(        )107.5 92.4 ms
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+(\(pthread_create\(&client_thread, )s
+F1 sf
+0.498 0 0.498 r
+(NULL)s
+F0 sf
+0 g
+(, )s
+F1 sf
+0.498 0.498 0 r
+(    70)59.5 82.4 ms
+F0 sf
+0 g
+(            *handler, \()107.5 82.4 ms
+F1 sf
+0 0.498 0 r
+(void)s
+F0 sf
+0 g
+(*\) &server_socket\)<)s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(\){)s
+F1 sf
+0.498 0.498 0 r
+(    71)59.5 72.4 ms
+F0 sf
+0 g
+(            fprintf\()107.5 72.4 ms
+F1 sf
+0.498 0 0.498 r
+(stderr)s
+F0 sf
+0 g
+(,)s
+F1 sf
+0.498 0 0.498 r
+("Thread cration failed")s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(    72)59.5 62.4 ms
+F0 sf
+0 g
+(            )107.5 62.4 ms
+F1 sf
+0.498 0.498 0 r
+(return)s
+F0 sf
+0 g
+( )s
+F1 sf
+0.498 0 0.498 r
+(1)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(    73)59.5 52.4 ms
+F0 sf
+0 g
+(        })107.5 52.4 ms
+re sp
+%%PageTrailer
+%%Page: 2 2
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(server.c                                                                      Page 2)59.5 792.4 ms
+0.498 0.498 0 r
+(    74)59.5 772.4 ms
+(    75)59.5 762.4 ms
+F0 sf
+0 g
+(        )107.5 762.4 ms
+F1 sf
+0 0.498 0.498 r
+(//Wait for thread to finish)s
+0.498 0.498 0 r
+(    76)59.5 752.4 ms
+F0 sf
+0 g
+(        pthread_join\(client_thread,)107.5 752.4 ms
+F1 sf
+0.498 0 0.498 r
+(NULL)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(    77)59.5 742.4 ms
+(    78)59.5 732.4 ms
+F0 sf
+0 g
+(    })107.5 732.4 ms
+F1 sf
+0.498 0.498 0 r
+(    79)59.5 722.4 ms
+F0 sf
+0 g
+(    close\(server_socket\);)107.5 722.4 ms
+F1 sf
+0.498 0.498 0 r
+(    80)59.5 712.4 ms
+F0 sf
+0 g
+(    )107.5 712.4 ms
+F1 sf
+0.498 0.498 0 r
+(return)s
+F0 sf
+0 g
+( )s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(    81)59.5 702.4 ms
+F0 sf
+0 g
+(})107.5 702.4 ms
+F1 sf
+0.498 0.498 0 r
+(    82)59.5 692.4 ms
+(    83)59.5 682.4 ms
+0 0.498 0 r
+(int)107.5 682.4 ms
+F0 sf
+0 g
+( handler\()s
+F1 sf
+0 0.498 0 r
+(void)s
+F0 sf
+0 g
+( *server_fd\) {)s
+F1 sf
+0.498 0.498 0 r
+(    84)59.5 672.4 ms
+F0 sf
+0 g
+(    )107.5 672.4 ms
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+( server_socket = *\()s
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+(*\)server_fd;)s
+F1 sf
+0.498 0.498 0 r
+(    85)59.5 662.4 ms
+F0 sf
+0 g
+(    )107.5 662.4 ms
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+( recv_bytes = )s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(    86)59.5 652.4 ms
+F0 sf
+0 g
+(    )107.5 652.4 ms
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+( peek_msg[REQUEST_PEEK_SIZE];)s
+F1 sf
+0.498 0.498 0 r
+(    87)59.5 642.4 ms
+F0 sf
+0 g
+(    )107.5 642.4 ms
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+( *curr_ptr;)s
+F1 sf
+0.498 0.498 0 r
+(    88)59.5 632.4 ms
+F0 sf
+0 g
+(    )107.5 632.4 ms
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+( content_length = )s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(    89)59.5 622.4 ms
+F0 sf
+0 g
+(    )107.5 622.4 ms
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+( header_length = )s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(    90)59.5 612.4 ms
+(    91)59.5 602.4 ms
+F0 sf
+0 g
+(    )107.5 602.4 ms
+F1 sf
+0 0.498 0.498 r
+(/*)s
+0.498 0.498 0 r
+(    92)59.5 592.4 ms
+0 0.498 0.498 r
+(     * Peek at response to get content length and size of header)107.5 592.4 ms
+0.498 0.498 0 r
+(    93)59.5 582.4 ms
+0 0.498 0.498 r
+(     */)107.5 582.4 ms
+0.498 0.498 0 r
+(    94)59.5 572.4 ms
+F0 sf
+0 g
+(    curr_ptr = peek_msg;)107.5 572.4 ms
+F1 sf
+0.498 0.498 0 r
+(    95)59.5 562.4 ms
+F0 sf
+0 g
+(    )107.5 562.4 ms
+F1 sf
+0.498 0.498 0 r
+(do)s
+F0 sf
+0 g
+({)s
+F1 sf
+0.498 0.498 0 r
+(    96)59.5 552.4 ms
+F0 sf
+0 g
+(        recv_bytes = recv\(server_socket, )107.5 552.4 ms
+F1 sf
+0.498 0.498 0 r
+(    97)59.5 542.4 ms
+F0 sf
+0 g
+(            curr_ptr, )107.5 542.4 ms
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\(peek_msg\)-)s
+F1 sf
+0.498 0 0.498 r
+(1)s
+F0 sf
+0 g
+(,MSG_PEEK\);)s
+F1 sf
+0.498 0.498 0 r
+(    98)59.5 532.4 ms
+F0 sf
+0 g
+(        )107.5 532.4 ms
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+(\(recv_bytes<=)s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(\){)s
+F1 sf
+0.498 0.498 0 r
+(    99)59.5 522.4 ms
+F0 sf
+0 g
+(            fprintf\()107.5 522.4 ms
+F1 sf
+0.498 0 0.498 r
+(stderr)s
+F0 sf
+0 g
+(,)s
+F1 sf
+0.498 0 0.498 r
+("No message received from client)s
+0.498 0 0 r
+(\\n)s
+0.498 0 0.498 r
+(")s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   100)59.5 512.4 ms
+F0 sf
+0 g
+(            )107.5 512.4 ms
+F1 sf
+0.498 0.498 0 r
+(return)s
+F0 sf
+0 g
+( -)s
+F1 sf
+0.498 0 0.498 r
+(1)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   101)59.5 502.4 ms
+F0 sf
+0 g
+(        })107.5 502.4 ms
+F1 sf
+0.498 0.498 0 r
+(   102)59.5 492.4 ms
+F0 sf
+0 g
+(        curr_ptr+=recv_bytes*)107.5 492.4 ms
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   103)59.5 482.4 ms
+F0 sf
+0 g
+(    })107.5 482.4 ms
+F1 sf
+0.498 0.498 0 r
+(while)s
+F0 sf
+0 g
+(\(\(curr_ptr-peek_msg\)/)s
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(\)<REQUEST_PEEK_SIZE-)s
+F1 sf
+0.498 0 0.498 r
+(1)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   104)59.5 472.4 ms
+F0 sf
+0 g
+(    peek_msg[recv_bytes] = )107.5 472.4 ms
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   105)59.5 462.4 ms
+(   106)59.5 452.4 ms
+F0 sf
+0 g
+(    )107.5 452.4 ms
+F1 sf
+0 0.498 0.498 r
+(/*)s
+0.498 0.498 0 r
+(   107)59.5 442.4 ms
+0 0.498 0.498 r
+(     * Get content length)107.5 442.4 ms
+0.498 0.498 0 r
+(   108)59.5 432.4 ms
+0 0.498 0.498 r
+(     */)107.5 432.4 ms
+0.498 0.498 0 r
+(   109)59.5 422.4 ms
+F0 sf
+0 g
+(    )107.5 422.4 ms
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+( *content_length_ptr = strstr\(peek_msg,TAG_CONTENT_LENGTH_START\)+)s
+F1 sf
+0.498 0.498 0 r
+(   110)59.5 412.4 ms
+F0 sf
+0 g
+(        strlen\(TAG_CONTENT_LENGTH_START\);)107.5 412.4 ms
+F1 sf
+0.498 0.498 0 r
+(   111)59.5 402.4 ms
+F0 sf
+0 g
+(    )107.5 402.4 ms
+F1 sf
+0.498 0.498 0 r
+(   112)59.5 392.4 ms
+F0 sf
+0 g
+(    )107.5 392.4 ms
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+( *content_length_end = strstr\(peek_msg,TAG_CONTENT_LENGTH_END\) -)s
+F1 sf
+0.498 0.498 0 r
+(   113)59.5 382.4 ms
+F0 sf
+0 g
+(        \()107.5 382.4 ms
+F1 sf
+0.498 0 0.498 r
+(2)s
+F0 sf
+0 g
+(*)s
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(\)\); )s
+F1 sf
+0 0.498 0.498 r
+(//Rm 2 chars since the previous line ends in \\r\\n)s
+0.498 0.498 0 r
+(   114)59.5 372.4 ms
+F0 sf
+0 g
+(    )107.5 372.4 ms
+F1 sf
+0.498 0.498 0 r
+(   115)59.5 362.4 ms
+F0 sf
+0 g
+(    )107.5 362.4 ms
+F1 sf
+0.498 0.498 0 r
+(while)s
+F0 sf
+0 g
+(\(content_length_ptr<content_length_end\){)s
+F1 sf
+0.498 0.498 0 r
+(   116)59.5 352.4 ms
+F0 sf
+0 g
+(        content_length = \(content_length*)107.5 352.4 ms
+F1 sf
+0.498 0 0.498 r
+(10)s
+F0 sf
+0 g
+(\) + \(content_length_ptr[)s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(]-)s
+F1 sf
+0.498 0 0.498 r
+('0')s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   117)59.5 342.4 ms
+F0 sf
+0 g
+(        content_length_ptr+=)107.5 342.4 ms
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   118)59.5 332.4 ms
+F0 sf
+0 g
+(    })107.5 332.4 ms
+F1 sf
+0.498 0.498 0 r
+(   119)59.5 322.4 ms
+(   120)59.5 312.4 ms
+F0 sf
+0 g
+(    )107.5 312.4 ms
+F1 sf
+0 0.498 0.498 r
+(/*)s
+0.498 0.498 0 r
+(   121)59.5 302.4 ms
+0 0.498 0.498 r
+(     * Get size of header)107.5 302.4 ms
+0.498 0.498 0 r
+(   122)59.5 292.4 ms
+0 0.498 0.498 r
+(     */)107.5 292.4 ms
+0.498 0.498 0 r
+(   123)59.5 282.4 ms
+F0 sf
+0 g
+(    )107.5 282.4 ms
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+( *response_start = strstr\(peek_msg,TAG_LAST_HEADER_LINE\)+)s
+F1 sf
+0.498 0.498 0 r
+(   124)59.5 272.4 ms
+F0 sf
+0 g
+(        strlen\(TAG_LAST_HEADER_LINE\);)107.5 272.4 ms
+F1 sf
+0.498 0.498 0 r
+(   125)59.5 262.4 ms
+F0 sf
+0 g
+(    header_length = \(response_start-peek_msg\) / )107.5 262.4 ms
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   126)59.5 252.4 ms
+(   127)59.5 242.4 ms
+F0 sf
+0 g
+(    )107.5 242.4 ms
+F1 sf
+0 0.498 0.498 r
+(/*)s
+0.498 0.498 0 r
+(   128)59.5 232.4 ms
+0 0.498 0.498 r
+(     * Recv header and discard it)107.5 232.4 ms
+0.498 0.498 0 r
+(   129)59.5 222.4 ms
+0 0.498 0.498 r
+(     */)107.5 222.4 ms
+0.498 0.498 0 r
+(   130)59.5 212.4 ms
+F0 sf
+0 g
+(    )107.5 212.4 ms
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+( *header = malloc\()s
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(\) * \(header_length+)s
+F1 sf
+0.498 0 0.498 r
+(1)s
+F0 sf
+0 g
+(\)\);)s
+F1 sf
+0.498 0.498 0 r
+(   131)59.5 202.4 ms
+F0 sf
+0 g
+(    curr_ptr = header;)107.5 202.4 ms
+F1 sf
+0.498 0.498 0 r
+(   132)59.5 192.4 ms
+F0 sf
+0 g
+(    )107.5 192.4 ms
+F1 sf
+0.498 0.498 0 r
+(do)s
+F0 sf
+0 g
+({)s
+F1 sf
+0.498 0.498 0 r
+(   133)59.5 182.4 ms
+F0 sf
+0 g
+(        recv_bytes = recv\(server_socket, curr_ptr, header_length,)107.5 182.4 ms
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   134)59.5 172.4 ms
+F0 sf
+0 g
+(        )107.5 172.4 ms
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+(\(recv_bytes<=)s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(\){)s
+F1 sf
+0.498 0.498 0 r
+(   135)59.5 162.4 ms
+F0 sf
+0 g
+(            printf\()107.5 162.4 ms
+F1 sf
+0.498 0 0.498 r
+("No message received from client)s
+0.498 0 0 r
+(\\n)s
+0.498 0 0.498 r
+(")s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   136)59.5 152.4 ms
+F0 sf
+0 g
+(            )107.5 152.4 ms
+F1 sf
+0.498 0.498 0 r
+(return)s
+F0 sf
+0 g
+( -)s
+F1 sf
+0.498 0 0.498 r
+(1)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   137)59.5 142.4 ms
+F0 sf
+0 g
+(        })107.5 142.4 ms
+F1 sf
+0.498 0.498 0 r
+(   138)59.5 132.4 ms
+F0 sf
+0 g
+(        curr_ptr+=recv_bytes*)107.5 132.4 ms
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   139)59.5 122.4 ms
+F0 sf
+0 g
+(    })107.5 122.4 ms
+F1 sf
+0.498 0.498 0 r
+(while)s
+F0 sf
+0 g
+(\(\(curr_ptr-header\)/)s
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(\)<header_length-)s
+F1 sf
+0.498 0 0.498 r
+(1)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   140)59.5 112.4 ms
+F0 sf
+0 g
+(    header[recv_bytes] = )107.5 112.4 ms
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   141)59.5 102.4 ms
+F0 sf
+0 g
+(    )107.5 102.4 ms
+F1 sf
+0.498 0.498 0 r
+(   142)59.5 92.4 ms
+F0 sf
+0 g
+(    )107.5 92.4 ms
+F1 sf
+0 0.498 0.498 r
+(/*)s
+0.498 0.498 0 r
+(   143)59.5 82.4 ms
+0 0.498 0.498 r
+(     * Recv content)107.5 82.4 ms
+0.498 0.498 0 r
+(   144)59.5 72.4 ms
+0 0.498 0.498 r
+(     */)107.5 72.4 ms
+0.498 0.498 0 r
+(   145)59.5 62.4 ms
+F0 sf
+0 g
+(    )107.5 62.4 ms
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+( *content = malloc\()s
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(\) * \(content_length+)s
+F1 sf
+0.498 0 0.498 r
+(1)s
+F0 sf
+0 g
+(\)\);)s
+F1 sf
+0.498 0.498 0 r
+(   146)59.5 52.4 ms
+F0 sf
+0 g
+(    curr_ptr = content;)107.5 52.4 ms
+re sp
+%%PageTrailer
+%%Page: 3 3
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(server.c                                                                      Page 3)59.5 792.4 ms
+0.498 0.498 0 r
+(   147)59.5 772.4 ms
+F0 sf
+0 g
+(    )107.5 772.4 ms
+F1 sf
+0 0.498 0.498 r
+(// We must keep recv'ing if the recv gives less bytes than we ask for)s
+0.498 0.498 0 r
+(   148)59.5 762.4 ms
+F0 sf
+0 g
+(    )107.5 762.4 ms
+F1 sf
+0.498 0.498 0 r
+(do)s
+F0 sf
+0 g
+({)s
+F1 sf
+0.498 0.498 0 r
+(   149)59.5 752.4 ms
+F0 sf
+0 g
+(        recv_bytes = recv\(server_socket, curr_ptr, content_length,)107.5 752.4 ms
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   150)59.5 742.4 ms
+F0 sf
+0 g
+(        )107.5 742.4 ms
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+(\(recv_bytes<=)s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(\){)s
+F1 sf
+0.498 0.498 0 r
+(   151)59.5 732.4 ms
+F0 sf
+0 g
+(            printf\()107.5 732.4 ms
+F1 sf
+0.498 0 0.498 r
+("No message received from client)s
+0.498 0 0 r
+(\\n)s
+0.498 0 0.498 r
+(")s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   152)59.5 722.4 ms
+F0 sf
+0 g
+(            )107.5 722.4 ms
+F1 sf
+0.498 0.498 0 r
+(return)s
+F0 sf
+0 g
+( -)s
+F1 sf
+0.498 0 0.498 r
+(1)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   153)59.5 712.4 ms
+F0 sf
+0 g
+(        })107.5 712.4 ms
+F1 sf
+0.498 0.498 0 r
+(   154)59.5 702.4 ms
+F0 sf
+0 g
+(        curr_ptr+=recv_bytes*)107.5 702.4 ms
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   155)59.5 692.4 ms
+F0 sf
+0 g
+(    })107.5 692.4 ms
+F1 sf
+0.498 0.498 0 r
+(while)s
+F0 sf
+0 g
+(\(\(curr_ptr-content\)/)s
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(\)<content_length-)s
+F1 sf
+0.498 0 0.498 r
+(1)s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   156)59.5 682.4 ms
+F0 sf
+0 g
+(    content[content_length] = )107.5 682.4 ms
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   157)59.5 672.4 ms
+(   158)59.5 662.4 ms
+F0 sf
+0 g
+(    )107.5 662.4 ms
+F1 sf
+0 0.498 0.498 r
+(//Print msg recv for debugging)s
+0.498 0.498 0 r
+(   159)59.5 652.4 ms
+F0 sf
+0 g
+(    printf\()107.5 652.4 ms
+F1 sf
+0.498 0 0.498 r
+("-----MSG RECV-----)s
+0.498 0 0 r
+(\\n%s%s\\n\\n)s
+0.498 0 0.498 r
+(")s
+F0 sf
+0 g
+(,header,content\);)s
+F1 sf
+0.498 0.498 0 r
+(   160)59.5 642.4 ms
+(   161)59.5 632.4 ms
+F0 sf
+0 g
+(    )107.5 632.4 ms
+F1 sf
+0 0.498 0.498 r
+(//Determine if we need to decode or encode, then call that function)s
+0.498 0.498 0 r
+(   162)59.5 622.4 ms
+F0 sf
+0 g
+(    )107.5 622.4 ms
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+( \(tolower\(content[)s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(]\) == )s
+F1 sf
+0.498 0 0.498 r
+('d')s
+F0 sf
+0 g
+(\) {)s
+F1 sf
+0.498 0.498 0 r
+(   163)59.5 612.4 ms
+F0 sf
+0 g
+(        decode\(content,content_length\);)107.5 612.4 ms
+F1 sf
+0.498 0.498 0 r
+(   164)59.5 602.4 ms
+F0 sf
+0 g
+(    } )107.5 602.4 ms
+F1 sf
+0.498 0.498 0 r
+(else)s
+F0 sf
+0 g
+( )s
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+( \(tolower\(content[)s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(]\) == )s
+F1 sf
+0.498 0 0.498 r
+('e')s
+F0 sf
+0 g
+(\) {)s
+F1 sf
+0.498 0.498 0 r
+(   165)59.5 592.4 ms
+F0 sf
+0 g
+(        encode\(content,content_length\);)107.5 592.4 ms
+F1 sf
+0.498 0.498 0 r
+(   166)59.5 582.4 ms
+F0 sf
+0 g
+(    } )107.5 582.4 ms
+F1 sf
+0.498 0.498 0 r
+(else)s
+F0 sf
+0 g
+( {)s
+F1 sf
+0.498 0.498 0 r
+(   167)59.5 572.4 ms
+F0 sf
+0 g
+(        printf\()107.5 572.4 ms
+F1 sf
+0.498 0 0.498 r
+("Invalid Message)s
+0.498 0 0 r
+(\\n)s
+0.498 0 0.498 r
+(")s
+F0 sf
+0 g
+(\);)s
+F1 sf
+0.498 0.498 0 r
+(   168)59.5 562.4 ms
+F0 sf
+0 g
+(        )107.5 562.4 ms
+F1 sf
+0.498 0.498 0 r
+(return)s
+F0 sf
+0 g
+( -)s
+F1 sf
+0.498 0 0.498 r
+(1)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   169)59.5 552.4 ms
+F0 sf
+0 g
+(    })107.5 552.4 ms
+F1 sf
+0.498 0.498 0 r
+(   170)59.5 542.4 ms
+F0 sf
+0 g
+(    )107.5 542.4 ms
+F1 sf
+0.498 0.498 0 r
+(   171)59.5 532.4 ms
+F0 sf
+0 g
+(    )107.5 532.4 ms
+F1 sf
+0 0.498 0.498 r
+(//Build the server response)s
+0.498 0.498 0 r
+(   172)59.5 522.4 ms
+F0 sf
+0 g
+(    )107.5 522.4 ms
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+( msg[content_length+RESPONSE_HEADER_SIZE];)s
+F1 sf
+0.498 0.498 0 r
+(   173)59.5 512.4 ms
+F0 sf
+0 g
+(    sprintf\(msg,)107.5 512.4 ms
+F1 sf
+0.498 0 0.498 r
+("Content-Length: )s
+0.498 0 0 r
+(%d\\r\\n)s
+0.498 0 0.498 r
+(")s
+0.498 0.498 0 r
+(   174)59.5 502.4 ms
+F0 sf
+0 g
+(        )107.5 502.4 ms
+F1 sf
+0.498 0 0.498 r
+("Connection: keep-alive)s
+0.498 0 0 r
+(\\r\\n\\r\\n)s
+0.498 0 0.498 r
+(")s
+0.498 0.498 0 r
+(   175)59.5 492.4 ms
+F0 sf
+0 g
+(        )107.5 492.4 ms
+F1 sf
+0.498 0 0.498 r
+(")s
+0.498 0 0 r
+(%s\\r\\n)s
+0.498 0 0.498 r
+(")s
+F0 sf
+0 g
+(,)s
+F1 sf
+0.498 0.498 0 r
+(   176)59.5 482.4 ms
+F0 sf
+0 g
+(        content_length-)107.5 482.4 ms
+F1 sf
+0.498 0 0.498 r
+(2)s
+F0 sf
+0 g
+(,content+)s
+F1 sf
+0.498 0 0.498 r
+(2)s
+F0 sf
+0 g
+(*)s
+F1 sf
+0.498 0.498 0 r
+(sizeof)s
+F0 sf
+0 g
+(\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(\)\);)s
+F1 sf
+0.498 0.498 0 r
+(   177)59.5 472.4 ms
+F0 sf
+0 g
+(    )107.5 472.4 ms
+F1 sf
+0.498 0.498 0 r
+(   178)59.5 462.4 ms
+F0 sf
+0 g
+(    send\(server_socket , msg, strlen\(msg\) , )107.5 462.4 ms
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+( \);)s
+F1 sf
+0.498 0.498 0 r
+(   179)59.5 452.4 ms
+(   180)59.5 442.4 ms
+F0 sf
+0 g
+(    )107.5 442.4 ms
+F1 sf
+0 0.498 0.498 r
+(//Print msg sent for debugging)s
+0.498 0.498 0 r
+(   181)59.5 432.4 ms
+F0 sf
+0 g
+(    printf\()107.5 432.4 ms
+F1 sf
+0.498 0 0.498 r
+("-----MSG SENT-----)s
+0.498 0 0 r
+(\\n%s\\n)s
+0.498 0 0.498 r
+(-----------------------)s
+0.498 0 0 r
+(\\n\\n)s
+0.498 0 0.498 r
+(")s
+F0 sf
+0 g
+(,msg\);)s
+F1 sf
+0.498 0.498 0 r
+(   182)59.5 422.4 ms
+F0 sf
+0 g
+(    )107.5 422.4 ms
+F1 sf
+0.498 0.498 0 r
+(   183)59.5 412.4 ms
+F0 sf
+0 g
+(    free\(header\);)107.5 412.4 ms
+F1 sf
+0.498 0.498 0 r
+(   184)59.5 402.4 ms
+F0 sf
+0 g
+(    free\(content\);)107.5 402.4 ms
+F1 sf
+0.498 0.498 0 r
+(   185)59.5 392.4 ms
+F0 sf
+0 g
+(    )107.5 392.4 ms
+F1 sf
+0.498 0.498 0 r
+(   186)59.5 382.4 ms
+F0 sf
+0 g
+(    )107.5 382.4 ms
+F1 sf
+0.498 0.498 0 r
+(return)s
+F0 sf
+0 g
+( )s
+F1 sf
+0.498 0 0.498 r
+(0)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   187)59.5 372.4 ms
+F0 sf
+0 g
+(})107.5 372.4 ms
+F1 sf
+0.498 0.498 0 r
+(   188)59.5 362.4 ms
+(   189)59.5 352.4 ms
+0 0.498 0.498 r
+(/*)107.5 352.4 ms
+0.498 0.498 0 r
+(   190)59.5 342.4 ms
+0 0.498 0.498 r
+( * Directly overwrite the content with the encoded string)107.5 342.4 ms
+0.498 0.498 0 r
+(   191)59.5 332.4 ms
+0 0.498 0.498 r
+( */)107.5 332.4 ms
+0.498 0.498 0 r
+(   192)59.5 322.4 ms
+0 0.498 0 r
+(void)107.5 322.4 ms
+F0 sf
+0 g
+( encode\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(* content, )s
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+( content_length\) {)s
+F1 sf
+0.498 0.498 0 r
+(   193)59.5 312.4 ms
+F0 sf
+0 g
+(    )107.5 312.4 ms
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+( i;)s
+F1 sf
+0.498 0.498 0 r
+(   194)59.5 302.4 ms
+F0 sf
+0 g
+(    )107.5 302.4 ms
+F1 sf
+0.498 0.498 0 r
+(   195)59.5 292.4 ms
+F0 sf
+0 g
+(    )107.5 292.4 ms
+F1 sf
+0 0.498 0.498 r
+(//Start at 3rd char since first two specify the type of request)s
+0.498 0.498 0 r
+(   196)59.5 282.4 ms
+F0 sf
+0 g
+(    )107.5 282.4 ms
+F1 sf
+0.498 0.498 0 r
+(for)s
+F0 sf
+0 g
+( \(i = )s
+F1 sf
+0.498 0 0.498 r
+(2)s
+F0 sf
+0 g
+(; i < content_length; i++ \) {)s
+F1 sf
+0.498 0.498 0 r
+(   197)59.5 272.4 ms
+F0 sf
+0 g
+(        )107.5 272.4 ms
+F1 sf
+0 0.498 0.498 r
+(//Add one to each char)s
+0.498 0.498 0 r
+(   198)59.5 262.4 ms
+F0 sf
+0 g
+(        )107.5 262.4 ms
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+( \(tolower\(content[i]\) == )s
+F1 sf
+0.498 0 0.498 r
+('z')s
+F0 sf
+0 g
+(\) {)s
+F1 sf
+0.498 0.498 0 r
+(   199)59.5 252.4 ms
+F0 sf
+0 g
+(            content[i] = )107.5 252.4 ms
+F1 sf
+0.498 0 0.498 r
+('a')s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   200)59.5 242.4 ms
+F0 sf
+0 g
+(        } )107.5 242.4 ms
+F1 sf
+0.498 0.498 0 r
+(else)s
+F0 sf
+0 g
+( )s
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+( \(tolower\(content[i]\) < )s
+F1 sf
+0.498 0 0.498 r
+('z')s
+F0 sf
+0 g
+( && tolower\(content[i]\)>=)s
+F1 sf
+0.498 0 0.498 r
+('a')s
+F0 sf
+0 g
+(\) {)s
+F1 sf
+0.498 0.498 0 r
+(   201)59.5 232.4 ms
+F0 sf
+0 g
+(            content[i] = tolower\(content[i]\) + )107.5 232.4 ms
+F1 sf
+0.498 0 0.498 r
+(1)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   202)59.5 222.4 ms
+F0 sf
+0 g
+(        } )107.5 222.4 ms
+F1 sf
+0.498 0.498 0 r
+(else)s
+F0 sf
+0 g
+( )s
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+(\(content[i]!=)s
+F1 sf
+0.498 0 0.498 r
+(' ')s
+F0 sf
+0 g
+(\) {)s
+F1 sf
+0.498 0.498 0 r
+(   203)59.5 212.4 ms
+F0 sf
+0 g
+(            content[i] = )107.5 212.4 ms
+F1 sf
+0.498 0 0.498 r
+('?')s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   204)59.5 202.4 ms
+F0 sf
+0 g
+(        }   )107.5 202.4 ms
+F1 sf
+0.498 0.498 0 r
+(   205)59.5 192.4 ms
+F0 sf
+0 g
+(    })107.5 192.4 ms
+F1 sf
+0.498 0.498 0 r
+(   206)59.5 182.4 ms
+F0 sf
+0 g
+(})107.5 182.4 ms
+F1 sf
+0.498 0.498 0 r
+(   207)59.5 172.4 ms
+(   208)59.5 162.4 ms
+0 0.498 0.498 r
+(/*)107.5 162.4 ms
+0.498 0.498 0 r
+(   209)59.5 152.4 ms
+0 0.498 0.498 r
+( * Directly overwrite the content with the decoded string)107.5 152.4 ms
+0.498 0.498 0 r
+(   210)59.5 142.4 ms
+0 0.498 0.498 r
+( */)107.5 142.4 ms
+0.498 0.498 0 r
+(   211)59.5 132.4 ms
+0 0.498 0 r
+(void)107.5 132.4 ms
+F0 sf
+0 g
+( decode\()s
+F1 sf
+0 0.498 0 r
+(char)s
+F0 sf
+0 g
+(* content, )s
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+( content_length\) {)s
+F1 sf
+0.498 0.498 0 r
+(   212)59.5 122.4 ms
+F0 sf
+0 g
+(    )107.5 122.4 ms
+F1 sf
+0 0.498 0 r
+(int)s
+F0 sf
+0 g
+( i;)s
+F1 sf
+0.498 0.498 0 r
+(   213)59.5 112.4 ms
+(   214)59.5 102.4 ms
+F0 sf
+0 g
+(    )107.5 102.4 ms
+F1 sf
+0 0.498 0.498 r
+(//Start at 3rd char since first two specify the type of request)s
+0.498 0.498 0 r
+(   215)59.5 92.4 ms
+F0 sf
+0 g
+(    )107.5 92.4 ms
+F1 sf
+0.498 0.498 0 r
+(for)s
+F0 sf
+0 g
+( \(i = )s
+F1 sf
+0.498 0 0.498 r
+(2)s
+F0 sf
+0 g
+(; i < content_length; i++ \) {)s
+F1 sf
+0.498 0.498 0 r
+(   216)59.5 82.4 ms
+F0 sf
+0 g
+(        )107.5 82.4 ms
+F1 sf
+0 0.498 0.498 r
+(//Remove one from each char)s
+0.498 0.498 0 r
+(   217)59.5 72.4 ms
+F0 sf
+0 g
+(        )107.5 72.4 ms
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+( \(content[i] == )s
+F1 sf
+0.498 0 0.498 r
+('a')s
+F0 sf
+0 g
+(\){)s
+F1 sf
+0.498 0.498 0 r
+(   218)59.5 62.4 ms
+F0 sf
+0 g
+(            content[i] = )107.5 62.4 ms
+F1 sf
+0.498 0 0.498 r
+('z')s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   219)59.5 52.4 ms
+F0 sf
+0 g
+(        } )107.5 52.4 ms
+F1 sf
+0.498 0.498 0 r
+(else)s
+F0 sf
+0 g
+( )s
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+( \(tolower\(content[i]\) > )s
+F1 sf
+0.498 0 0.498 r
+('a')s
+F0 sf
+0 g
+( && tolower\(content[i]\)<=)s
+F1 sf
+0.498 0 0.498 r
+('z')s
+F0 sf
+0 g
+(\) {)s
+re sp
+%%PageTrailer
+%%Page: 4 4
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(server.c                                                                      Page 4)59.5 792.4 ms
+0.498 0.498 0 r
+(   220)59.5 772.4 ms
+F0 sf
+0 g
+(            content[i] = tolower\(content[i]\) - )107.5 772.4 ms
+F1 sf
+0.498 0 0.498 r
+(1)s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   221)59.5 762.4 ms
+F0 sf
+0 g
+(        } )107.5 762.4 ms
+F1 sf
+0.498 0.498 0 r
+(else)s
+F0 sf
+0 g
+( )s
+F1 sf
+0.498 0.498 0 r
+(if)s
+F0 sf
+0 g
+(\(content[i]!=)s
+F1 sf
+0.498 0 0.498 r
+(' ')s
+F0 sf
+0 g
+(\) {)s
+F1 sf
+0.498 0.498 0 r
+(   222)59.5 752.4 ms
+F0 sf
+0 g
+(            content[i] = )107.5 752.4 ms
+F1 sf
+0.498 0 0.498 r
+('?')s
+F0 sf
+0 g
+(;)s
+F1 sf
+0.498 0.498 0 r
+(   223)59.5 742.4 ms
+F0 sf
+0 g
+(        }   )107.5 742.4 ms
+F1 sf
+0.498 0.498 0 r
+(   224)59.5 732.4 ms
+F0 sf
+0 g
+(    })107.5 732.4 ms
+F1 sf
+0.498 0.498 0 r
+(   225)59.5 722.4 ms
+F0 sf
+0 g
+(})107.5 722.4 ms
+re sp
+%%PageTrailer
+%%Trailer
+%%Pages: 4
+%%EOF
+

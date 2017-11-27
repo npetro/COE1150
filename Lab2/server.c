@@ -81,7 +81,7 @@ int main(int argc, char const *argv[])
 int handler(void *server_fd) {
 	int server_socket = *(int*)server_fd;
 	int recv_bytes = 0;
-    char peek_message[REQUEST_PEEK_SIZE];
+    char peek_msg[REQUEST_PEEK_SIZE];
 	char *curr_ptr;
 	int content_length = 0;
 	int header_length = 0;
@@ -89,24 +89,24 @@ int handler(void *server_fd) {
 	/*
 	 * Peek at response to get content length and size of header
 	 */
-	curr_ptr = peek_message;
+	curr_ptr = peek_msg;
 	do{
-		recv_bytes = recv(server_socket, curr_ptr, sizeof(peek_message)-1,MSG_PEEK);
+		recv_bytes = recv(server_socket, curr_ptr, sizeof(peek_msg)-1,MSG_PEEK);
 		if(recv_bytes<=0){
 			fprintf(stderr,"No message received from client\n");
 			return -1;
 		}
 		curr_ptr+=recv_bytes*sizeof(char);
-	}while((curr_ptr-peek_message)/sizeof(char)<REQUEST_PEEK_SIZE-1);
-	peek_message[recv_bytes] = 0;
+	}while((curr_ptr-peek_msg)/sizeof(char)<REQUEST_PEEK_SIZE-1);
+	peek_msg[recv_bytes] = 0;
 
 	/*
 	 * Get content length
 	 */
-	char *content_length_ptr = strstr(peek_message,TAG_CONTENT_LENGTH_START)+
+	char *content_length_ptr = strstr(peek_msg,TAG_CONTENT_LENGTH_START)+
 		strlen(TAG_CONTENT_LENGTH_START);
 	
-	char *content_length_end = strstr(peek_message,TAG_CONTENT_LENGTH_END) -
+	char *content_length_end = strstr(peek_msg,TAG_CONTENT_LENGTH_END) -
 		(2*sizeof(char)); //Rm 2 chars since the previous line ends in \r\n
 	
 	while(content_length_ptr<content_length_end){
@@ -117,9 +117,9 @@ int handler(void *server_fd) {
 	/*
 	 * Get size of header
 	 */
-	char *response_start = strstr(peek_message,TAG_LAST_HEADER_LINE)+
+	char *response_start = strstr(peek_msg,TAG_LAST_HEADER_LINE)+
 		strlen(TAG_LAST_HEADER_LINE);
-	header_length = (response_start-peek_message) / sizeof(char);
+	header_length = (response_start-peek_msg) / sizeof(char);
 
 	/*
 	 * Recv header and discard it

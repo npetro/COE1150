@@ -3,8 +3,8 @@
  * Kevin Gilboy and Nick Petro
  *
  * This program is a client that sends a request to the server to encode or 
- * decode any string input by the user at runtime. The runtime arguments are:
- * -e for encode or -d for decode followed by a string in quotes. For example
+ * decode any string input by the user at runtime. The runtime args are:
+ * -e for encode or -d for decode followed by a string in quotes. For ex
  * ./client -e "hello world" would encode the string "hello world" and
  * ./client -d "ifmmp xpsme" would decode the string "ifmmp xpsme"
  *
@@ -23,12 +23,17 @@
 #define PORT 1150
 #define URL "127.0.0.1"
 
+#define RESPONSE_PEEK_SIZE 800
+#define REQUEST_HEADER_SIZE 128
+
+/*
+ * Constants needed for content and content length extraction
+ */
 #define TAG_CONTENT_LENGTH_START "Content-Length: "
 #define TAG_CONTENT_LENGTH_END "Connection: "
 #define TAG_LAST_HEADER_LINE "Connection: keep-alive\r\n\r\n"
 
 int main(int argc, char *argv[]){
-	int success;
 	/*
 	 * Check input args for tag and msg
 	 */
@@ -60,13 +65,11 @@ int main(int argc, char *argv[]){
 }
 
 int sendToServer(char *msg){
-	int success = 0;
 	int recv_bytes = 0;
 	int content_length = 0;
 	int header_length = 0;
-	int peek_size = 800;
-	char peek_message[peek_size];
-	char get_command[strlen(msg)+128];
+	char peek_msg[RESPONSE_PEEK_SIZE];
+	char get_command[strlen(msg)+REQUEST_HEADER_SIZE];
 	struct sockaddr_in server_addr;
 	char *curr_ptr;
 	
@@ -112,25 +115,25 @@ int sendToServer(char *msg){
 	/*
 	 * Peek at response to get content length and size of header
 	 */
-	curr_ptr = peek_message;
+	curr_ptr = peek_msg;
 	do{
 		recv_bytes = recv(client_socket, curr_ptr,
-			sizeof(peek_message)-1,MSG_PEEK);
+			sizeof(peek_msg)-1,MSG_PEEK);
 		if(recv_bytes<=0){
 			fprintf(stderr,"No message received from host\n");
 			return -1;
 		}
 		curr_ptr+=recv_bytes*sizeof(char);
-	} while((curr_ptr-peek_message)/sizeof(char)<peek_size-1);
-	peek_message[recv_bytes] = 0;
+	} while((curr_ptr-peek_msg)/sizeof(char)<RESPONSE_PEEK_SIZE-1);
+	peek_msg[recv_bytes] = 0;
 
 	/*
 	 * Get content length
 	 */
-	char *content_length_ptr = strstr(peek_message,TAG_CONTENT_LENGTH_START)+
+	char *content_length_ptr = strstr(peek_msg,TAG_CONTENT_LENGTH_START)+
 		strlen(TAG_CONTENT_LENGTH_START);
 	
-	char *content_length_end = strstr(peek_message,TAG_CONTENT_LENGTH_END) -
+	char *content_length_end = strstr(peek_msg,TAG_CONTENT_LENGTH_END) -
 		(2*sizeof(char)); //Rm 2 chars since the previous line ends in \r\n
 	
 	while(content_length_ptr<content_length_end){
@@ -141,9 +144,9 @@ int sendToServer(char *msg){
 	/*
 	 * Get size of header
 	 */
-	char *response_start = strstr(peek_message,TAG_LAST_HEADER_LINE)+
+	char *response_start = strstr(peek_msg,TAG_LAST_HEADER_LINE)+
 		strlen(TAG_LAST_HEADER_LINE);
-	header_length = (response_start-peek_message) / sizeof(char);
+	header_length = (response_start-peek_msg) / sizeof(char);
 
 	/*
 	 * Recv header and discard it
@@ -183,5 +186,5 @@ int sendToServer(char *msg){
 	free(header);
 	free(content);
 
-	return success;
+	return 0;
 }
