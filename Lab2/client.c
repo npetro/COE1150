@@ -1,14 +1,14 @@
-/**
-  * Kevin Gilboy and Nick Petro
-  *	ECE 1150 - Intro to Networks
-  *	Lab 1
- 
-  ***   PLEASE NOTE: All multi-line comments before code sections were
-  ***	written to help the developers with organizing the program
-  ***	before implementing. They were not meant in any way to insult
-  ***	the intelligence of any readers of this program :^)
-
- */
+/*
+ * Server.c
+ * Kevin Gilboy and Nick Petro
+ *
+ * This program is a client that sends a request to the server to encode or 
+ * decode any string input by the user at runtime. The runtime arguments are:
+ * -e for encode or -d for decode followed by a string in quotes. For example
+ * ./client -e "hello world" would encode the string "hello world" and
+ * ./client -d "ifmmp xpsme" would decode the string "ifmmp xpsme"
+ *
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,7 +20,7 @@
 #include <arpa/inet.h>
 #include <string.h>
 
-#define PORT 8085
+#define PORT 1150
 #define URL "127.0.0.1"
 
 #define TAG_CONTENT_LENGTH_START "Content-Length: "
@@ -90,8 +90,9 @@ int sendToServer(char *msg){
 		return -1;
 	}
 
-	int connection_status = connect(client_socket, (struct sockaddr *)&server_addr,
-		sizeof(server_addr));
+	// Connect to server
+	int connection_status = connect(client_socket,
+		(struct sockaddr *)&server_addr, sizeof(server_addr));
 	if(connection_status<0){
 		fprintf(stderr,"Connection failed\n");
 		return -1;
@@ -100,7 +101,12 @@ int sendToServer(char *msg){
 	/*
 	 * Build a GET request and send it
 	 */
-	sprintf(get_command,"POST / HTTP/1.1\r\nHost: "URL"\r\nContent-Length: %d\r\nConnection: keep-alive\r\n\r\n%s\r\n",strlen(msg),msg);
+	sprintf(get_command,"POST / HTTP/1.1\r\n"
+		"Host: "URL"\r\n"
+		"Content-Length: %d\r\n"
+		"Connection: keep-alive\r\n\r\n"
+		"%s\r\n",
+		strlen(msg),msg);
 	send(client_socket,get_command,strlen(get_command),0);
 	
 	/*
@@ -108,7 +114,8 @@ int sendToServer(char *msg){
 	 */
 	curr_ptr = peek_message;
 	do{
-		recv_bytes = recv(client_socket, curr_ptr, sizeof(peek_message)-1,MSG_PEEK);
+		recv_bytes = recv(client_socket, curr_ptr,
+			sizeof(peek_message)-1,MSG_PEEK);
 		if(recv_bytes<=0){
 			fprintf(stderr,"No message received from host\n");
 			return -1;
@@ -120,7 +127,8 @@ int sendToServer(char *msg){
 	/*
 	 * Get content length
 	 */
-	char *content_length_ptr = strstr(peek_message,TAG_CONTENT_LENGTH_START)+strlen(TAG_CONTENT_LENGTH_START);
+	char *content_length_ptr = strstr(peek_message,TAG_CONTENT_LENGTH_START)+
+		strlen(TAG_CONTENT_LENGTH_START);
 	
 	char *content_length_end = strstr(peek_message,TAG_CONTENT_LENGTH_END) -
 		(2*sizeof(char)); //Rm 2 chars since the previous line ends in \r\n
@@ -133,7 +141,8 @@ int sendToServer(char *msg){
 	/*
 	 * Get size of header
 	 */
-	char *response_start = strstr(peek_message,TAG_LAST_HEADER_LINE)+strlen(TAG_LAST_HEADER_LINE);
+	char *response_start = strstr(peek_message,TAG_LAST_HEADER_LINE)+
+		strlen(TAG_LAST_HEADER_LINE);
 	header_length = (response_start-peek_message) / sizeof(char);
 
 	/*
@@ -150,7 +159,6 @@ int sendToServer(char *msg){
 		curr_ptr+=recv_bytes*sizeof(char);
 	} while((curr_ptr-header)/sizeof(char)<header_length-1);
 	header[recv_bytes] = 0;
-	free(header);
 	
 	/*
 	 * Recv content
@@ -168,16 +176,12 @@ int sendToServer(char *msg){
 	} while((curr_ptr-content)/sizeof(char)<content_length-1);
 	content[content_length] = 0;
 
-	fprintf(stderr,"%s\n",content);
+	fprintf(stderr,"%s\n\n",content);
 
 	close(client_socket);
 
+	free(header);
 	free(content);
+
 	return success;
-}
-
-
-int printLine(){
-	printf("-----------------------------------------------\n");
-	return 0;
 }
