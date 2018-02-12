@@ -216,6 +216,7 @@ int displayWeather(char *content){
 	printLine();
 	printf("\n");
 	
+	return success;
 }
 
 int printLine(){
